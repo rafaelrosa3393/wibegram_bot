@@ -25,16 +25,16 @@ function Home() {
   const [remainedEnergy, setRemainedEnergy] = useState<number>(0);
   const [limit, setLimit] = useState<number>(0);
   const [loadingStatus, setLoadingStatus] = useState<boolean>(false);
-  // useEffect(() => {
-  //   const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
-  //   if (webapp) {
-  //     setUsername(webapp["user"]["username"]);
-  //     axios.post(`/vibe/add,`, { username: webapp["user"]["username"] });
-  //     axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
-  //     dispatch(insertWallet(webapp["user"]["username"]));
-  //     dispatch(getWallet(webapp["user"]["username"]))
-  //   }
-  // }, []);
+  useEffect(() => {
+    const webapp = (window as any).Telegram?.WebApp.initDataUnsafe;
+    if (webapp) {
+      setUsername(webapp["user"]["username"]);
+      axios.post(`/vibe/add,`, { username: webapp["user"]["username"] });
+      axios.post(`/earnings/add`, { username: webapp["user"]["username"] });
+      dispatch(insertWallet(webapp["user"]["username"]));
+      dispatch(getWallet(webapp["user"]["username"]))
+    }
+  }, []);
   console.log("---Telegram information----->", username);
   useEffect(() => {
     setLimit(userState.limit);
